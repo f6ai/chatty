@@ -13,7 +13,9 @@ class HelloController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        return new Response(implode(',', $this->messages));
+        return $this->render('base.html.twig',[
+            
+        ]);
     }
 
     #[Route('/messages/{id<\d+>}', name: 'app_show_one')]
