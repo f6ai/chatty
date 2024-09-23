@@ -1,17 +1,15 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
-
 	<div class="container-lg">
-		<a href="#" class="navbar-brand">
-			<img src="{{ asset('images/logo.svg') }}" height="28" alt="Chatty McChatty">
+		<a href="{{ path('app_post') }}" class=" navbar-brand">
+			<img src="{{ asset('images/logo.svg') }}" height="36" alt="Chatty McChatty">
 		</a>
 		<button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<div class="navbar-nav">
-				<a href="#" class="nav-item nav-link active">Home</a>
-				<a href="#" class="nav-item nav-link">Post</a>
-				<a href="#" class="nav-item nav-link">Create</a>
+				<a href="{{ path('app_post') }}" class="nav-item nav-link">Posts</a>
+				<a href="{{ path('app_post_new') }}" class="nav-item nav-link">Create</a>
 			</div>
 			<div class="navbar-nav ms-auto">
 				<a href="#" class="nav-item nav-link">Login</a>

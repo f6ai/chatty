@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Posts
+{% endblock %}
+
+{% block body %}
+	<table class="table border align-middle mb-0 bg-white w-100 my-5">
+		<thead class="bg-light">
+			<tr>
+				<th>Title</th>
+				<th>Topic</th>
+				<th>Created by</th>
+				<th>Comments</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for post in posts %}
+				<tr>
+					<td>
+						<p class="fw-normal mb-1">{{ post.title }}</p>
+					</td>
+					<td>
+						<span class="badge rounded-pill text-bg-primary d-inline">Space</span>
+					</td>
+					<td>
+						<div class="d-flex align-items-center">
+							<img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
+							<div class="ms-3">
+								<p class="fw-bold mb-1">John Doe</p>
+								<p class="text-muted mb-0">john.doe@gmail.com</p>
+							</div>
+						</div>
+					</td>
+					<td>
+						<span class="badge rounded-pill text-bg-success d-inline">14</span>
+					</td>
+					<td>
+						<a href="{{ path('app_post_edit') }}" class="btn btn-outline-warning btn-sm btn-rounded me-2">
+							Edit
+						</a>
+						<a href="" class="btn btn-outline-primary btn-sm btn-rounded">
+							Comment
+						</a>
+
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}
