@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Create New Post
+{% endblock %}
+
+{% block body %}
+	<div class="d-flex flex-col align-items-center justify-content-center my-5">
+		<div class="border shadow-sm" style="width: 30rem">
+			<div class="border-bottom py-3 px-5 fs-5">
+				Create New Post
+			</div>
+			<div class="p-5">
+				{{ include('post/_form.html.twig') }}
+			</div>
+		</div>
+	</div>
+{% endblock %}
