@@ -5,9 +5,8 @@
 
 {% block body %}
 
-	<div class="d-flex justify-content-center">
+	<div class="d-flex flex-column align-items-center">
 		<div class="card my-5" style="width: 35rem;">
-
 			<div class="card-header d-flex justify-content-between align-items-center">
 				<div class="d-flex align-items-center">
 					<img src="https://mdbootstrap.com/img/new/avatars/8.jpg" alt="" style="width: 45px; height: 45px" class="rounded-circle"/>
@@ -25,7 +24,7 @@
 						</button>
 						<ul class="dropdown-menu">
 							<li>
-								<a class="dropdown-item" href="#">Comment</a>
+								<a class="dropdown-item" href="{{ path('app_post_comment', {'id': post.id }) }}">Add Comment</a>
 							</li>
 							<li>
 								<a class="dropdown-item" href="#">User Profile</a>
@@ -47,8 +46,8 @@
 
 			<div class="card-footer text-body-secondary">
 				<div class="d-flex align-items-center card-text fs-6 text-muted pb-2">
-					<div>Created at:
-						{{ post.created|date }}
+					<div>
+						{{ post.created|date("H:i j F Y") }}
 					</div>
 					<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-dot" viewbox="0 0 16 16">
 						<path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
@@ -64,16 +63,16 @@
 						Likes</div>
 				</div>
 				<div class="d-flex justify-content-between pt-2">
-					<div class="btn">
+					<a href="" class="btn">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill text-danger" viewbox="0 0 16 16">
 							<path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
 						</svg>
-					</div>
-					<div class="btn">
+					</a>
+					<a href="{{ path('app_post_comment', {'id': post.id }) }}" class="btn">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-left" viewbox="0 0 16 16">
 							<path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z"/>
 						</svg>
-					</div>
+					</a>
 					<div class="btn">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bookmark" viewbox="0 0 16 16">
 							<path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v13.5a.5.5 0 0 1-.777.416L8 13.101l-5.223 2.815A.5.5 0 0 1 2 15.5zm2-1a1 1 0 0 0-1 1v12.566l4.723-2.482a.5.5 0 0 1 .554 0L13 14.566V2a1 1 0 0 0-1-1z"/>
@@ -93,4 +92,13 @@
 				</div>
 			</div>
 		</div>
-	{% endblock %}
+
+		<div class="mt-5 mb-2 ps-2" style="width: 35rem;">
+			<h4>Comments</h4>
+		</div>
+
+		<div class="mb-5" style="width: 35rem;">
+			{{ include('comment/timeline.html.twig') }}
+		</div>
+	</div>
+{% endblock %}

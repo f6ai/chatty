@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Entity\Comment;
+use App\Form\CommentType;
 use App\Repository\PostRepository;
+use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,11 +72,39 @@ class PostController extends AbstractController
         ]);
     }
 
+    #[Route('/post/{id}/comment', name: 'app_post_comment', priority: 3)]
+    public function addComment(Post $post, CommentRepository $commentRepository, Request $request, EntityManagerInterface $entityManagerInterface): Response 
+    {
+        $form = $this->createForm(CommentType::class, new Comment());
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+            $comment->setPost($post);
+
+            $entityManagerInterface->persist($comment);
+            $entityManagerInterface->flush();
+
+            $this->addFlash('success', 'Your comment was saved.');
+
+            return $this->redirectToRoute('app_post_show', [
+                'id'=> $post->getId(),
+            ]);
+        }
+
+        return $this->render('comment/_form.html.twig', [
+            'form' => $form,
+            'post' => $post,
+        ]);
+    }
+
      #[Route('/post/{id}', name: 'app_post_show')]
     public function showOne(Post $post): Response 
     {
         return $this->render('post/show.html.twig', [
             'post' => $post,
+            'comments' => $post->getComments(),
         ]);
     }
 }

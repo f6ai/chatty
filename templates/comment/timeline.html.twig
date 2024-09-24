@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+			<div id="content">
+				<ul class="timeline w-100">
+					{% for comment in comments|reverse %}
+						<li class="comment">
+							<p>{{ comment.text }}</p>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
