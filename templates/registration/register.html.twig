@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register
+{% endblock %}
+
+{% block body %}
+	{% for flash_error in app.flashes('verify_email_error') %}
+		<div class="alert alert-danger my-2" role="alert">{{ flash_error }}</div>
+	{% endfor %}
+
+	<div class="d-flex justify-content-center my-5">
+		<div class="col-md-3">
+			<div class="card shadow-lg p-4">
+				<h3 class="text-center mb-4">Register</h3>
+				{{ form_start(registrationForm, {'attr': {'novalidate': 'novalidate'}}) }}
+				{{ form_errors(registrationForm) }}
+
+				{{ form_start(registrationForm) }}
+				{{ form_row(registrationForm.email) }}
+				{{ form_row(registrationForm.plainPassword.first, {
+                        label: 'Password'
+                    }) }}
+				{{ form_row(registrationForm.plainPassword.second, {
+                        label: 'Repeat password'
+                    }) }}
+
+				{{ form_row(registrationForm.agreeTerms, {'label': 'I read and agree to Terms and Conditions.'}) }}
+
+				<div class="d-grid gap-2 my-4">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</div>
+				{{ form_end(registrationForm) }}
+
+				<div class="text-center mt-3">
+					Already have an account?
+					<a href="{{ path('app_login') }}">Login here</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
