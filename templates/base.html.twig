@@ -19,8 +19,21 @@
 	</head>
 	<body>
 		{{ include('_navbar.html.twig') }}
-		<div class="container-lg"> {% block body %}{% endblock %}
+		<div class="container-lg">
+			<div data-turbo="false" class="my-3" data-controller="alert" data-alert-target="container">
+				{% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
+					{% for message in messages %}
+						<div class="alert alert-{{ label }} alert-dismissible" role="alert">
+							<div>{{ message }}</div>
+							<button type="button" data-action="click->alert#remove" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+						</div>
+					{% endfor %}
+				{% endfor %}
 			</div>
-			{{ include('_footer.html.twig') }}
-		</body>
-	</html>
+
+			{% block body %}{% endblock %}
+
+		</div>
+		{{ include('_footer.html.twig') }}
+	</body>
+</html>
