@@ -9,7 +9,9 @@
 		<div class="collapse navbar-collapse" id="navbarCollapse">
 			<div class="navbar-nav">
 				<a href="{{ path('app_post') }}" class="nav-item nav-link">Posts</a>
-				<a href="{{ path('app_post_new') }}" class="nav-item nav-link">Create</a>
+				{% if app.user %}
+					<a href="{{ path('app_post_new') }}" class="nav-item nav-link">Create</a>
+				{% endif %}
 			</div>
 			<div class="navbar-nav ms-auto">
 				<a href="{{ path('app_login') }}" class="nav-item nav-link">Login</a>

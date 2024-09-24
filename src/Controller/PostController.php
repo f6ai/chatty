@@ -37,6 +37,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $post = $form->getData();
             $post->setCreated(new \DateTime());
+            $post->setAuthor($this->getUser());
             $entityManagerInterface->persist($post);
             $entityManagerInterface->flush();
 
@@ -84,6 +85,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $comment = $form->getData();
             $comment->setPost($post);
+            $comment->setAuthor($this->getUser());
 
             $entityManagerInterface->persist($comment);
             $entityManagerInterface->flush();
