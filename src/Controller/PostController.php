@@ -21,7 +21,7 @@ class PostController extends AbstractController
         ]);
     }
 
-        #[Route('/post/new', name: 'app_post_new')]
+    #[Route('/post/new', name: 'app_post_new', priority: 1)]
     public function new(Request $request, EntityManagerInterface $entityManagerInterface): Response 
     {
         $post = new Post();
@@ -45,11 +45,27 @@ class PostController extends AbstractController
         ]);
     }
 
-    #[Route('/post/edit', name: 'app_post_edit')]
-    public function edit(Post $post): Response 
+    #[Route('/post/{id}/edit', name: 'app_post_edit', priority: 2)]
+    public function edit(Post $post, Request $request, EntityManagerInterface $entityManagerInterface): Response 
     {
+        $form = $this->createForm(PostType::class, $post);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post = $form->getData();
+            $entityManagerInterface->persist($post);
+            $entityManagerInterface->flush();
+
+            $this->addFlash('success', 'Your post was updated.');
+
+            return $this->redirectToRoute('app_post', [
+                'id'=> $post->getId(),
+            ]);
+        }
+
         return $this->render('post/edit.html.twig', [
-            
+            'form' => $form->createView(),
         ]);
     }
 

@@ -19,7 +19,7 @@
 	</head>
 	<body>
 		{{ include('_navbar.html.twig') }}
-		<div class="container-lg">
+		<div class="container-lg mb-5">
 			<div data-turbo="false" class="my-3" data-controller="alert" data-alert-target="container">
 				{% for label, messages in app.flashes(['success', 'warning', 'danger', 'info']) %}
 					{% for message in messages %}
