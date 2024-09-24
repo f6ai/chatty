@@ -20,7 +20,7 @@ class PostController extends AbstractController
     public function index(PostRepository $postRepository): Response
     {
         return $this->render('post/index.html.twig', [
-            'posts' => $postRepository->findAll(),
+            'posts' => $postRepository->findAllWithComments(),
         ]);
     }
 
@@ -104,7 +104,6 @@ class PostController extends AbstractController
     {
         return $this->render('post/show.html.twig', [
             'post' => $post,
-            'comments' => $post->getComments(),
         ]);
     }
 }

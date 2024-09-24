@@ -16,6 +16,17 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findAllWithComments(): array
+       {
+           return $this->createQueryBuilder('p')
+            ->addSelect('c')
+            ->leftJoin('p.comments', 'c')
+            ->orderBy('p.created', 'DESC')
+            ->getQuery()
+            ->getResult()
+           ;
+       }
+
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

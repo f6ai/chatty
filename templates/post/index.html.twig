@@ -10,8 +10,8 @@
 				<th>Title</th>
 				<th>Topic</th>
 				<th>Created by</th>
+				<th>More</th>
 				<th>Comments</th>
-				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,19 +50,21 @@
 						</div>
 					</td>
 					<td>
-						<span class="badge rounded-pill text-bg-success d-inline">14</span>
-					</td>
-					<td>
-						<a href="{{ path('app_post_show', {'id': post.id }) }}" class="btn btn-outline-info btn-sm btn-rounded me-2">
-							Show details
+						<a href="{{ path('app_post_show', {'id': post.id }) }}" class="btn btn-outline-info btn-sm btn-rounded me-2" style="width: 5rem;">
+							Details
 						</a>
-						<a href="{{ path('app_post_edit', {'id': post.id }) }}" class="btn btn-outline-warning btn-sm btn-rounded me-2">
+						<a href="{{ path('app_post_edit', {'id': post.id }) }}" class="btn btn-outline-warning btn-sm btn-rounded me-2" style="width: 5rem;">
 							Edit
 						</a>
-						<a href="{{ path('app_post_comment', {'id': post.id }) }}" class="btn btn-outline-primary btn-sm btn-rounded">
+					</td>
+					<td>
+						<a href="{{ path('app_post_comment', {'id': post.id }) }}" class="btn btn-sm btn-rounded btn-outline-primary position-relative">
 							Comment
+							<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
+								{{ post.comments.count }}
+								<span class="visually-hidden">Comments</span>
+							</span>
 						</a>
-
 					</td>
 				</tr>
 			{% endfor %}
