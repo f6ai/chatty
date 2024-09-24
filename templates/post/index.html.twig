@@ -21,7 +21,24 @@
 						<p class="fw-normal mb-1">{{ post.title }}</p>
 					</td>
 					<td>
-						<span class="badge rounded-pill text-bg-primary d-inline">Space</span>
+						{% if post.topic == 'Life' %}
+							<span class="badge rounded-pill text-bg-info d-inline">{{ post.topic }}</span>
+						{% endif %}
+						{% if post.topic == 'Software Engineering' %}
+							<span class="badge rounded-pill text-bg-danger d-inline">{{ post.topic }}</span>
+						{% endif %}
+						{% if post.topic == 'Pets' %}
+							<span class="badge rounded-pill text-bg-success d-inline">{{ post.topic }}</span>
+						{% endif %}
+						{% if post.topic == 'Space' %}
+							<span class="badge rounded-pill text-bg-primary d-inline">{{ post.topic }}</span>
+						{% endif %}
+						{% if post.topic == 'Funny' %}
+							<span class="badge rounded-pill text-bg-warning d-inline">{{ post.topic }}</span>
+						{% endif %}
+						{% if post.topic == 'Misc' %}
+							<span class="badge rounded-pill text-bg-secondary d-inline">{{ post.topic }}</span>
+						{% endif %}
 					</td>
 					<td>
 						<div class="d-flex align-items-center">

@@ -31,6 +31,9 @@ class Post
     #[ORM\OneToMany(targetEntity: Comment::class, mappedBy: 'post', orphanRemoval: true)]
     private Collection $comments;
 
+    #[ORM\Column(length: 255)]
+    private ?string $topic = null;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
@@ -103,6 +106,18 @@ class Post
                 $comment->setPost(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTopic(): ?string
+    {
+        return $this->topic;
+    }
+
+    public function setTopic(string $topic): static
+    {
+        $this->topic = $topic;
 
         return $this;
     }
